@@ -15,10 +15,12 @@ class RatingController < ApplicationController
 
   # POST /ratings
   def create
-    @rating = Rating.new(rating_params)
+    post = Post.find(params[:post_id]) 
+    @rating = post.ratings.build(rating_params)
+
 
     if @rating.save
-      render json: @rating, status: :created, location: @rating
+      render json: @rating, status: :created
     else
       render json: @rating.errors, status: :unprocessable_entity
     end
@@ -46,6 +48,6 @@ class RatingController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def rating_params
-      params.require(:rating).permit(:login)
+      params.require(:rating).permit(:rate, :number_of_rates)
     end
 end

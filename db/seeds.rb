@@ -5,3 +5,27 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+# db/seed.rb
+puts "Seeding..."
+
+
+count_of_users_start = 0
+count_of_users_fin = 100
+
+count_of_posts_start = 0
+count_of_posts_fin = 200 #should be 200 000
+
+while count_of_users_start < count_of_users_fin  do
+   User.create(login: "user" + count_of_users_start.to_s)
+
+   count_of_users_start +=1
+end
+
+while count_of_posts_start < count_of_posts_fin  do
+  Post.create(title: "title" + count_of_posts_start.to_s, body: "body" + count_of_posts_start.to_s, author_ip: "127.0.0." + rand(0..256).to_s, user_id: rand(1..100)) 
+
+  count_of_posts_start +=1
+end
+
+puts "Seeding done."

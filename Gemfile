@@ -12,7 +12,11 @@ gem "pg"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
+gem "pry"
+
 gem 'active_model_serializers'
+
+gem 'pagy'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"

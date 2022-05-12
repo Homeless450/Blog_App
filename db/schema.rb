@@ -27,7 +27,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_10_093328) do
   create_table "ratings", force: :cascade do |t|
     t.bigint "post_id", null: false
     t.float "rate"
-    t.integer "number_of_rates"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_ratings_on_post_id"

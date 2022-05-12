@@ -14,7 +14,7 @@ count_of_users_start = 0
 count_of_users_fin = 100
 
 count_of_posts_start = 0
-count_of_posts_fin = 200 #should be 200 000
+count_of_posts_fin = 200000
 
 while count_of_users_start < count_of_users_fin  do
    User.create(login: "user" + count_of_users_start.to_s)

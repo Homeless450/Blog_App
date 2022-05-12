@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.joins(:ratings).group('id').order('avg(ratings.rate) desc').first(10)
+    @posts = Post.joins(:ratings).group("id").order("avg(ratings.rate) desc").first(10)
 
     render json: @posts
   end
@@ -32,17 +32,22 @@ class PostsController < ApplicationController
   end
 
   # PATCH/PUT /posts/1
-  # def update
-  #   if @post.update(post_params)
-  #     render json: @post
-  #   else
-  #     render json: @post.errors, status: :unprocessable_entity
-  #   end
-  # end
+  def update
+    if @post.update(post_params)
+      render json: @post
+    else
+      render json: @post.errors, status: :unprocessable_entity
+    end
+  end
 
   def hash 
-    @hashes = Post.group(:author_ip).count.first(100)
-    render json: @hashes, status: :created
+    @list_of_ips = params[:list_of_ips]
+    @hash = @list_of_ips.map do |ip|
+      @array_of_users = User.joins(:posts).where(posts: {author_ip: ip}).pluck(:login)
+      [ip, @array_of_users]
+    end.to_h
+
+    render json: @hash, status: :created
   end
 
   # DELETE /posts/1
